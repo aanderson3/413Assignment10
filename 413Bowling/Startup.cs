@@ -53,6 +53,24 @@ namespace _413Bowling
 
             app.UseEndpoints(endpoints =>
             {
+                //if passed team name and page num
+                endpoints.MapControllerRoute("teamnamepagenum",
+                    "Team/{teamid}/{teamname}",
+                    new {Controller = "Home", action = "Index"}
+                    );
+
+                //if passed only team name (team id)
+                endpoints.MapControllerRoute("teamid",
+                    "Team/{teamid}/{teamname}",
+                    new {Controller = "Home", action = "Index", pagenum = 1}
+                    );
+
+                //if passed only page num
+                endpoints.MapControllerRoute("pagenum",
+                    "{pagenum}",
+                    new {Controller = "Home", action = "Index"}
+                    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
