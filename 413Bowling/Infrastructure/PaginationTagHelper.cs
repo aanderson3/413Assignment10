@@ -28,6 +28,12 @@ namespace _413Bowling.Infrastructure
         [HtmlAttributeNotBound]
         [ViewContext]
         public ViewContext ViewContext { get; set; }
+
+        //so we know which page should be highlighted
+        public bool PageClassesEnabled { get; set; } = false;
+        public string PageClass { get; set; }
+        public string PageClassNormal { get; set; }
+        public string PageClassSelected { get; set; }
         
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
@@ -42,6 +48,14 @@ namespace _413Bowling.Infrastructure
                 KeyValuePairs["pagenum"] = i;
 
                 individualTag.Attributes["href"] = urlHelp.Action("Index", KeyValuePairs);
+
+                //add css class based on if page is selected or not
+                if (PageClassesEnabled)
+                {
+                    individualTag.AddCssClass(PageClass);
+                    individualTag.AddCssClass(i == PageInfo.CurrentPage ? PageClassSelected : PageClassNormal);
+                }
+
                 individualTag.InnerHtml.Append(i.ToString());
 
                 finishedTag.InnerHtml.AppendHtml(individualTag);

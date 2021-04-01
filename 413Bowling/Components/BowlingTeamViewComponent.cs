@@ -16,6 +16,8 @@ namespace _413Bowling.Components
 
         public IViewComponentResult Invoke()
         {
+            ViewBag.SelectedTeam = RouteData?.Values["teamname"];
+
             //set up data we want to pass to the view
             return View(context.Teams
                 .Distinct()
