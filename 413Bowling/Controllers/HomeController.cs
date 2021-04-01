@@ -47,7 +47,8 @@ namespace _413Bowling.Controllers
                         context.Bowlers.Where(x => x.TeamId == teamid).Count())
                 },
 
-                TeamName = teamname
+
+            TeamName = teamname
             });
         }
 
